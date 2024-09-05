@@ -1,0 +1,42 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             x:Class="Module02Exercise01.View.OfflinePage"
+             Title="OfflinePage"
+             BackgroundColor="#F7F7F7">
+
+    <VerticalStackLayout 
+        VerticalOptions="Center" 
+        HorizontalOptions="Center"
+        Spacing="20"
+        Padding="30">
+
+        <Image Source="nointernet.png"
+                HeightRequest="150"
+                WidthRequest="150"
+                HorizontalOptions="Center"
+                Aspect="AspectFit" />
+
+        <Label Text="You are currently offline." 
+               FontSize="24"
+               FontAttributes="Bold"
+               HorizontalOptions="Center"
+               TextColor="#333333"
+               HorizontalTextAlignment="Center" />
+
+            <Label Text="Please check your internet connection and try again." 
+               FontSize="16"
+               HorizontalOptions="Center" 
+               TextColor="Gray"
+               HorizontalTextAlignment="Center" />
+
+            <Button Text="Retry"
+                BackgroundColor="#007AFF"
+                TextColor="White"
+                WidthRequest="120"
+                HeightRequest="40"
+                CornerRadius="20"
+                HorizontalOptions="Center"
+                Command="{Binding RetryCommand}" />
+    </VerticalStackLayout>
+</ContentPage>
