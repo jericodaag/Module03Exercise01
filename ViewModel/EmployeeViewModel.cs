@@ -12,7 +12,6 @@ namespace Module02Exercise01.ViewModels
         private ObservableCollection<Employee> _allEmployees;
         private ObservableCollection<Employee> _displayedEmployees;
         private bool _isShowingManagers;
-        private string _searchText;
 
         public ObservableCollection<Employee> DisplayedEmployees
         {
@@ -23,20 +22,6 @@ namespace Module02Exercise01.ViewModels
                 {
                     _displayedEmployees = value;
                     OnPropertyChanged(nameof(DisplayedEmployees));
-                }
-            }
-        }
-
-        public string SearchText
-        {
-            get => _searchText;
-            set
-            {
-                if (_searchText != value)
-                {
-                    _searchText = value;
-                    OnPropertyChanged(nameof(SearchText));
-                    FilterEmployees();
                 }
             }
         }
@@ -53,34 +38,20 @@ namespace Module02Exercise01.ViewModels
 
         public EmployeeViewModel()
         {
+            // Initialize with some dummy data
             _allEmployees = new ObservableCollection<Employee>
             {
-                new Employee { FirstName = "Jerico", LastName = "Daag", Position = "Developer", Department = "IT", IsActive = true, ImagePath = "john.png" },
-                new Employee { FirstName = "Elmalia", LastName = "Diaz", Position = "Manager", Department = "HR", IsActive = true, ImagePath = "jane.png" },
-                new Employee { FirstName = "Joshua", LastName = "Daguio", Position = "Developer", Department = "IT", IsActive = true, ImagePath = "robert.png" },
-                new Employee { FirstName = "Anne", LastName = "Canlas", Position = "Manager", Department = "Finance", IsActive = true, ImagePath = "emily.png" },
-                new Employee { FirstName = "Paul", LastName = "Yumang", Position = "Analyst", Department = "Marketing", IsActive = true, ImagePath = "michael.png" }
+                new Employee { FirstName = "John", LastName = "Doe", Position = "Developer", Department = "IT", IsActive = true, ImagePath = "john.png" },
+                new Employee { FirstName = "Jane", LastName = "Smith", Position = "Manager", Department = "HR", IsActive = true, ImagePath = "jane.png" },
+                new Employee { FirstName = "Robert", LastName = "Johnson", Position = "Developer", Department = "IT", IsActive = true, ImagePath = "robert.png" },
+                new Employee { FirstName = "Emily", LastName = "Davis", Position = "Manager", Department = "Finance", IsActive = true, ImagePath = "emily.png" },
+                new Employee { FirstName = "Michael", LastName = "Brown", Position = "Analyst", Department = "Marketing", IsActive = true, ImagePath = "michael.png" }
             };
 
             DisplayedEmployees = new ObservableCollection<Employee>(_allEmployees);
-            _isShowingManagers = false;
+            _isShowingManagers = false; // Initial state to show all employees
 
             DisplayManagerCommand = new Command(DisplayManager);
-        }
-
-        private void FilterEmployees()
-        {
-            if (string.IsNullOrEmpty(SearchText))
-            {
-                DisplayedEmployees = new ObservableCollection<Employee>(_allEmployees);
-            }
-            else
-            {
-                var filteredEmployees = _allEmployees
-                    .Where(e => (e.FirstName + " " + e.LastName).ToLower().Contains(SearchText.ToLower()))
-                    .ToList();
-                DisplayedEmployees = new ObservableCollection<Employee>(filteredEmployees);
-            }
         }
 
         private void DisplayManager()
